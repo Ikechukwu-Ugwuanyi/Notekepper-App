@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun displayNote() {
-        val textNoteTitle = activity.findViewById<EditText>(R.id.textNoteTitle)
+
        val note = DataManager.notes[notePosition]
         textNoteTitle.setText(note.title)
         textNoteText.setText(note.text)
