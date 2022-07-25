@@ -3,6 +3,8 @@ package com.example.notekeeperapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.Spinner
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -28,15 +30,20 @@ class NoteListActivity : AppCompatActivity() {
             startActivity(activityIntent)
         }
 
-        binding.listNotes.adapter = ArrayAdapter(this,
+        findViewById<ListView>(R.id.listNotes).adapter = ArrayAdapter(this,
             android.R.layout.simple_list_item_1,
             DataManager.notes)
 
-        listNotes.setOnItemClickListener{parent, view, position, id ->
+        findViewById<ListView>(R.id.listNotes).setOnItemClickListener{parent, view, position, id ->
             val activityIntent = Intent(this, MainActivity::class.java)
             activityIntent.putExtra("EXTRA_NOTE_POSITION", position)
             startActivity(activityIntent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (findViewById<ListView>(R.id.listNotes).adapter as ArrayAdapter<NoteInfo>).notifyDataSetChanged()
     }
 
 }
